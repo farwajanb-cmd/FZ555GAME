@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FZ555GAME</title>
+<style>
+body {
+  background: #101827;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  padding: 20px;
+}
+h1 { color: #00e5ff; }
+button {
+  background: #00c853;
+  color: white;
+  border: 0;
+  padding: 14px 25px;
+  margin: 8px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<h1>🎮 FZ555GAME</h1>
+<h2>Welcome to FZ555GAME</h2>
+<p>Play Together, Enjoy Together!</p>
+<h3 id="status">Player 1 Turn</h3>
+<div id="board"></div>
+<button onclick="resetGame()">New Game</button>
+<script>
+let turn = "X";
+let cells = Array(9).fill("");
+let board = document.getElementById("board");
+
+function render() {
+ board.innerHTML = "";
+ cells.forEach((v,i) => {
+  let b = document.createElement("button");
+  b.style.width = "75px";
+  b.style.height = "65px";
+  b.textContent = v || "-";
+  b.onclick = () => play(i);
+  board.appendChild(b);
+  if(i%3===2) board.appendChild(document.createElement("br"));
+ });
+}
+function play(i) {
+ if(cells[i] || checkWin()) return;
+ cells[i] = turn;
+ if(checkWin()) {
+  document.getElementById("status").textContent =
+   "Player " + turn + " Wins!";
+ } else if(cells.every(Boolean)) {
+  document.getElementById("status").textContent = "Draw!";
+ } else {
+  turn = turn === "X" ? "O" : "X";
+  document.getElementById("status").textContent =
+   "Player " + turn + " Turn";
+ }
+ render();
+}
+function checkWin() {
+ return [[0,1,2],[3,4,5],[6,7,8],
+ [0,3,6],[1,4,7],[2,5,8],
+ [0,4,8],[2,4,6]].some(line =>
+ line.every(i => cells[i] === turn));
+}
+function resetGame() {
+ cells = Array(9).fill("");
+ turn = "X";
+ document.getElementById("status").textContent = "Player X Turn";
+ render();
+}
+render();
+</script>
+</body>
+</html>
