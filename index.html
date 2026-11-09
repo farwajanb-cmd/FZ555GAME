@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,77 +6,155 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FZ555GAME</title>
 <style>
-body {
-  background: #101827;
-  color: white;
-  font-family: Arial;
-  text-align: center;
-  padding: 20px;
+*{box-sizing:border-box}
+body{
+margin:0;
+min-height:100vh;
+font-family:Arial,sans-serif;
+background:linear-gradient(145deg,#090d24,#172b50);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
-h1 { color: #00e5ff; }
-button {
-  background: #00c853;
-  color: white;
-  border: 0;
-  padding: 14px 25px;
-  margin: 8px;
-  border-radius: 10px;
-  font-size: 18px;
+.game{
+width:100%;
+max-width:420px;
+text-align:center;
+background:#111b36;
+padding:25px 18px;
+border-radius:25px;
+box-shadow:0 10px 35px #0008;
 }
+h1{color:#42e8ff;font-size:34px;margin:5px}
+.subtitle{color:#b8c9e8;margin-bottom:25px}
+.players{
+display:flex;
+justify-content:space-around;
+margin:20px 0;
+}
+.player{
+background:#202f53;
+padding:12px 18px;
+border-radius:12px;
+}
+.player strong{display:block;font-size:25px;color:#42e8ff}
+#status{
+font-size:19px;
+margin:22px 0;
+color:#ffe16a;
+font-weight:bold;
+}
+.board{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+.cell{
+aspect-ratio:1;
+border:2px solid #344b78;
+border-radius:15px;
+background:#1b2a4c;
+color:white;
+font-size:48px;
+font-weight:bold;
+cursor:pointer;
+}
+.cell:active{background:#304c7b}
+button:focus-visible{outline:3px solid #42e8ff}
+.actions{margin-top:22px}
+.reset{
+border:0;
+border-radius:30px;
+padding:14px 30px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+.footer{margin-top:25px;color:#8295b9;font-size:13px}
 </style>
 </head>
 <body>
-<h1>🎮 FZ555GAME</h1>
-<h2>Welcome to FZ555GAME</h2>
-<p>Play Together, Enjoy Together!</p>
-<h3 id="status">Player 1 Turn</h3>
-<div id="board"></div>
-<button onclick="resetGame()">New Game</button>
-<script>
-let turn = "X";
-let cells = Array(9).fill("");
-let board = document.getElementById("board");
+<div class="game">
+<h1>FZ555GAME</h1>
+<div class="subtitle">Tic Tac Toe Challenge</div>
 
-function render() {
- board.innerHTML = "";
- cells.forEach((v,i) => {
-  let b = document.createElement("button");
-  b.style.width = "75px";
-  b.style.height = "65px";
-  b.textContent = v || "-";
-  b.onclick = () => play(i);
-  board.appendChild(b);
-  if(i%3===2) board.appendChild(document.createElement("br"));
- });
+<div class="players">
+<div class="player">PLAYER 1<strong>X</strong></div>
+<div class="player">PLAYER 2<strong>O</strong></div>
+</div>
+
+<div id="status">Player X's Turn</div>
+
+<div class="board" id="board">
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+<button class="cell"></button>
+</div>
+
+<div class="actions">
+<button class="reset" onclick="resetGame()">NEW GAME</button>
+</div>
+<div class="footer">© 2026 FZ555GAME | Play & Enjoy</div>
+</div>
+
+<script>
+let current="X";
+let cells=Array(9).fill("");
+let active=true;
+
+const board=document.getElementById("board");
+const status=document.getElementById("status");
+
+const wins=[
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
+];
+
+board.querySelectorAll(".cell").forEach((cell,i)=>{
+cell.addEventListener("click",()=>{
+if(!active || cells[i])return;
+
+cells[i]=current;
+cell.textContent=current;
+cell.style.color=current==="X"?"#42e8ff":"#ff83c8";
+
+if(wins.some(line=>line.every(index=>cells[index]===current))){
+status.textContent="🎉 Player "+current+" Wins!";
+active=false;
+return;
 }
-function play(i) {
- if(cells[i] || checkWin()) return;
- cells[i] = turn;
- if(checkWin()) {
-  document.getElementById("status").textContent =
-   "Player " + turn + " Wins!";
- } else if(cells.every(Boolean)) {
-  document.getElementById("status").textContent = "Draw!";
- } else {
-  turn = turn === "X" ? "O" : "X";
-  document.getElementById("status").textContent =
-   "Player " + turn + " Turn";
- }
- render();
+
+if(cells.every(Boolean)){
+status.textContent="It's a Draw!";
+active=false;
+return;
 }
-function checkWin() {
- return [[0,1,2],[3,4,5],[6,7,8],
- [0,3,6],[1,4,7],[2,5,8],
- [0,4,8],[2,4,6]].some(line =>
- line.every(i => cells[i] === turn));
+
+current=current==="X"?"O":"X";
+status.textContent="Player "+current+"'s Turn";
+});
+});
+
+function resetGame(){
+current="X";
+cells=Array(9).fill("");
+active=true;
+board.querySelectorAll(".cell").forEach(cell=>{
+cell.textContent="";
+});
+status.textContent="Player X's Turn";
 }
-function resetGame() {
- cells = Array(9).fill("");
- turn = "X";
- document.getElementById("status").textContent = "Player X Turn";
- render();
-}
-render();
 </script>
 </body>
 </html>
