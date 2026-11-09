@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,152 +10,281 @@
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-min-height:100vh;
-font-family:Arial,sans-serif;
-background:linear-gradient(145deg,#090d24,#172b50);
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
+ margin:0;min-height:100vh;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(145deg,#080d24,#14264b,#080d24);
+ color:white;text-align:center;
+ padding:22px 14px;
 }
-.game{
-width:100%;
-max-width:420px;
-text-align:center;
-background:#111b36;
-padding:25px 18px;
-border-radius:25px;
-box-shadow:0 10px 35px #0008;
+.container{max-width:440px;margin:auto}
+.logo{
+ font-size:34px;font-weight:900;
+ color:#20e8ff;
+ text-shadow:0 0 18px #00bfff;
+ margin:15px 0 5px;
 }
-h1{color:#42e8ff;font-size:34px;margin:5px}
-.subtitle{color:#b8c9e8;margin-bottom:25px}
-.players{
-display:flex;
-justify-content:space-around;
-margin:20px 0;
+.tag{color:#aebbd9;margin-bottom:25px}
+h2{font-size:22px}
+button{
+ border:0;border-radius:12px;
+ padding:14px 18px;font-size:16px;
+ font-weight:bold;cursor:pointer;
 }
-.player{
-background:#202f53;
-padding:12px 18px;
-border-radius:12px;
+.menu button{
+ width:100%;margin:9px 0;
+ background:linear-gradient(90deg,#087cff,#00d5d5);
+ color:white;
 }
-.player strong{display:block;font-size:25px;color:#42e8ff}
-#status{
-font-size:19px;
-margin:22px 0;
-color:#ffe16a;
-font-weight:bold;
+.menu button:hover{filter:brightness(1.15)}
+.panel{
+ background:#111d39;border:1px solid #28466d;
+ border-radius:18px;padding:18px;
+ box-shadow:0 8px 30px #0006;
 }
+.hidden{display:none}
+.scores{
+ display:flex;justify-content:space-around;
+ gap:8px;margin:15px 0;
+}
+.score{
+ background:#1c2c4c;padding:12px;
+ border-radius:12px;flex:1;
+}
+.score strong{display:block;font-size:25px;color:#25e5ff}
+.status{font-size:18px;margin:18px 0;color:#ffe17a}
 .board{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:9px;margin:18px auto;max-width:330px;
 }
 .cell{
-aspect-ratio:1;
-border:2px solid #344b78;
-border-radius:15px;
-background:#1b2a4c;
-color:white;
-font-size:48px;
-font-weight:bold;
-cursor:pointer;
+ aspect-ratio:1;background:#203657;
+ border:2px solid #34547c;
+ border-radius:14px;color:#20e8ff;
+ font-size:52px;font-weight:900;
+ display:flex;align-items:center;justify-content:center;
+ padding:0;
 }
-.cell:active{background:#304c7b}
-button:focus-visible{outline:3px solid #42e8ff}
-.actions{margin-top:22px}
-.reset{
-border:0;
-border-radius:30px;
-padding:14px 30px;
-background:linear-gradient(90deg,#00c6ff,#0072ff);
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
+.cell.o{color:#ffba4a}
+.cell:disabled{cursor:default;opacity:1}
+.actions{display:flex;gap:10px;margin-top:15px}
+.actions button{flex:1;background:#087cff;color:white}
+.back{background:#34445e!important}
+select{
+ width:100%;padding:12px;border-radius:10px;
+ background:#203657;color:white;font-size:16px;
+ border:1px solid #42638c;margin:8px 0;
 }
-.footer{margin-top:25px;color:#8295b9;font-size:13px}
+.footer{margin-top:25px;color:#8197b9;font-size:12px}
 </style>
 </head>
 <body>
-<div class="game">
-<h1>FZ555GAME</h1>
-<div class="subtitle">Tic Tac Toe Challenge</div>
+<div class="container">
+ <div class="logo">FZ555GAME</div>
+ <div class="tag">PLAY • CHALLENGE • WIN</div>
 
-<div class="players">
-<div class="player">PLAYER 1<strong>X</strong></div>
-<div class="player">PLAYER 2<strong>O</strong></div>
-</div>
+ <section id="menu" class="panel menu">
+  <h2>WELCOME TO FZ555</h2>
+  <p>Choose Your Game Mode</p>
+  <button onclick="startGame('computer')">🤖 SINGLE PLAYER</button>
+  <button onclick="startGame('friend')">👥 TWO PLAYERS</button>
+  <p style="color:#9eb5d6;font-size:13px">Challenge yourself or play with a friend!</p>
+ </section>
 
-<div id="status">Player X's Turn</div>
+ <section id="game" class="panel hidden">
+  <h2 id="modeTitle">FZ555 GAME</h2>
+  <div id="difficultyBox">
+   <select id="difficulty">
+    <option value="easy">Easy Level</option>
+    <option value="medium">Medium Level</option>
+    <option value="hard">Hard Level</option>
+   </select>
+  </div>
 
-<div class="board" id="board">
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-<button class="cell"></button>
-</div>
+  <div class="scores">
+   <div class="score">Player X<strong id="scoreX">0</strong></div>
+   <div class="score">Player O<strong id="scoreO">0</strong></div>
+   <div class="score">Draws<strong id="scoreD">0</strong></div>
+  </div>
 
-<div class="actions">
-<button class="reset" onclick="resetGame()">NEW GAME</button>
-</div>
-<div class="footer">© 2026 FZ555GAME | Play & Enjoy</div>
+  <div class="status" id="status">Player X's Turn</div>
+  <div class="board" id="board">
+   <button class="cell" onclick="play(0)"></button>
+   <button class="cell" onclick="play(1)"></button>
+   <button class="cell" onclick="play(2)"></button>
+   <button class="cell" onclick="play(3)"></button>
+   <button class="cell" onclick="play(4)"></button>
+   <button class="cell" onclick="play(5)"></button>
+   <button class="cell" onclick="play(6)"></button>
+   <button class="cell" onclick="play(7)"></button>
+   <button class="cell" onclick="play(8)"></button>
+  </div>
+
+  <div class="actions">
+   <button onclick="resetBoard()">🔄 NEW GAME</button>
+   <button class="back" onclick="goMenu()">MENU</button>
+  </div>
+ </section>
+ <div class="footer">© 2026 FZ555GAME • Have Fun!</div>
 </div>
 
 <script>
-let current="X";
 let cells=Array(9).fill("");
-let active=true;
-
-const board=document.getElementById("board");
-const status=document.getElementById("status");
-
+let turn="X";
+let mode="friend";
+let finished=false;
+let scores={X:0,O:0,D:0};
 const wins=[
-[0,1,2],[3,4,5],[6,7,8],
-[0,3,6],[1,4,7],[2,5,8],
-[0,4,8],[2,4,6]
+ [0,1,2],[3,4,5],[6,7,8],
+ [0,3,6],[1,4,7],[2,5,8],
+ [0,4,8],[2,4,6]
 ];
+const board=document.querySelectorAll(".cell");
 
-board.querySelectorAll(".cell").forEach((cell,i)=>{
-cell.addEventListener("click",()=>{
-if(!active || cells[i])return;
-
-cells[i]=current;
-cell.textContent=current;
-cell.style.color=current==="X"?"#42e8ff":"#ff83c8";
-
-if(wins.some(line=>line.every(index=>cells[index]===current))){
-status.textContent="🎉 Player "+current+" Wins!";
-active=false;
-return;
+function startGame(m){
+ mode=m;
+ document.getElementById("menu").classList.add("hidden");
+ document.getElementById("game").classList.remove("hidden");
+ document.getElementById("difficultyBox").style.display=
+  mode==="computer"?"block":"none";
+ document.getElementById("modeTitle").textContent=
+  mode==="computer"?"SINGLE PLAYER":"TWO PLAYERS";
+ scores={X:0,O:0,D:0};
+ updateScores();
+ resetBoard();
 }
-
-if(cells.every(Boolean)){
-status.textContent="It's a Draw!";
-active=false;
-return;
+function goMenu(){
+ document.getElementById("game").classList.add("hidden");
+ document.getElementById("menu").classList.remove("hidden");
 }
-
-current=current==="X"?"O":"X";
-status.textContent="Player "+current+"'s Turn";
-});
-});
-
-function resetGame(){
-current="X";
-cells=Array(9).fill("");
-active=true;
-board.querySelectorAll(".cell").forEach(cell=>{
-cell.textContent="";
-});
-status.textContent="Player X's Turn";
+function updateScores(){
+ document.getElementById("scoreX").textContent=scores.X;
+ document.getElementById("scoreO").textContent=scores.O;
+ document.getElementById("scoreD").textContent=scores.D;
+}
+function resetBoard(){
+ cells=Array(9).fill("");
+ turn="X";
+ finished=false;
+ board.forEach(b=>{
+  b.textContent="";
+  b.disabled=false;
+  b.classList.remove("o");
+ });
+ setStatus("Player X's Turn");
+}
+function setStatus(t){
+ document.getElementById("status").textContent=t;
+}
+function winner(a){
+ for(const line of wins){
+  const [x,y,z]=line;
+  if(a[x] && a[x]===a[y] && a[y]===a[z])
+   return a[x];
+ }
+ if(a.every(Boolean))return "D";
+ return null;
+}
+function play(i){
+ if(finished || cells[i])return;
+ if(mode==="computer" && turn==="O")return;
+ move(i);
+ if(finished)return;
+ if(mode==="computer" && turn==="O"){
+  setStatus("Computer is thinking...");
+  setTimeout(computerMove,350);
+ }
+}
+function move(i){
+ cells[i]=turn;
+ board[i].textContent=turn;
+ if(turn==="O")board[i].classList.add("o");
+ board[i].disabled=true;
+ const result=winner(cells);
+ if(result){
+  finished=true;
+  if(result==="D"){
+   scores.D++;
+   setStatus("🤝 MATCH DRAW!");
+  }else{
+   scores[result]++;
+   setStatus(result==="X"?"🏆 PLAYER X WINS!":
+    (mode==="computer"?"🤖 COMPUTER WINS!":"🏆 PLAYER O WINS!"));
+  }
+  updateScores();
+  board.forEach(b=>b.disabled=true);
+  return;
+ }
+ turn=turn==="X"?"O":"X";
+ setStatus(mode==="computer" && turn==="O"?
+  "Computer's Turn":`Player ${turn}'s Turn`);
+}
+function computerMove(){
+ if(finished)return;
+ const level=document.getElementById("difficulty").value;
+ let i;
+ if(level==="easy"){
+  i=randomMove();
+ }else if(level==="medium"){
+  i=mediumMove();
+ }else{
+  i=bestMove();
+ }
+ if(i!==undefined && i!==null)move(i);
+}
+function randomMove(){
+ const a=cells.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+ return a[Math.floor(Math.random()*a.length)];
+}
+function mediumMove(){
+ return findWinningMove("O") ??
+        findWinningMove("X") ??
+        bestSimple();
+}
+function findWinningMove(p){
+ for(let i=0;i<9;i++){
+  if(!cells[i]){
+   let a=[...cells];a[i]=p;
+   if(winner(a)===p)return i;
+  }
+ }
+ return null;
+}
+function bestSimple(){
+ if(!cells[4])return 4;
+ const corners=[0,2,6,8].filter(i=>!cells[i]);
+ if(corners.length)return corners[Math.floor(Math.random()*corners.length)];
+ return randomMove();
+}
+function bestMove(){
+ let best=-Infinity,choice=null;
+ for(let i=0;i<9;i++){
+  if(!cells[i]){
+   cells[i]="O";
+   let value=minimax(cells,0,false);
+   cells[i]="";
+   if(value>best){best=value;choice=i;}
+  }
+ }
+ return choice;
+}
+function minimax(a,depth,isMax){
+ let r=winner(a);
+ if(r==="O")return 10-depth;
+ if(r==="X")return depth-10;
+ if(r==="D")return 0;
+ if(isMax){
+  let best=-Infinity;
+  for(let i=0;i<9;i++)if(!a[i]){
+   a[i]="O";best=Math.max(best,minimax(a,depth+1,false));a[i]="";
+  }
+  return best;
+ }else{
+  let best=Infinity;
+  for(let i=0;i<9;i++)if(!a[i]){
+   a[i]="X";best=Math.min(best,minimax(a,depth+1,true));a[i]="";
+  }
+  return best;
+ }
 }
 </script>
 </body>
