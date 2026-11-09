@@ -1,312 +1,261 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d20">
-<title>FZ555GAME - Ultimate Play</title>
+<title>FZ555GAME</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;min-height:100vh;padding:22px 14px;
+ margin:0;min-height:100vh;padding:20px 12px;
  font-family:Arial,sans-serif;color:white;text-align:center;
- background:
- radial-gradient(ellipse at 50% 0%,#164d78 0%,transparent 55%),
- linear-gradient(145deg,#070b19,#101b38 55%,#070b19);
+ background:linear-gradient(145deg,#07152e,#101044,#25104a);
 }
-.app{max-width:440px;margin:auto}
+.container{max-width:440px;margin:auto}
 .logo{
- font-size:36px;font-weight:1000;letter-spacing:2px;
- background:linear-gradient(90deg,#fff,#27e5ff,#f8c65b);
- -webkit-background-clip:text;color:transparent;
- filter:drop-shadow(0 0 12px #00cfff55);
- margin:18px 0 5px;
+ font-size:36px;font-weight:900;letter-spacing:2px;
+ color:#ffd76a;text-shadow:0 0 18px #ffb700;
+ margin:12px 0 5px
 }
-.subtitle{color:#9fb5d5;font-size:12px;letter-spacing:4px}
+.subtitle{color:#b8c8ff;margin-bottom:22px}
 .panel{
- background:linear-gradient(145deg,#182b4b,#0d1730);
- border:1px solid #31577e;border-radius:24px;
- padding:23px 17px;margin-top:25px;
- box-shadow:0 12px 40px #0008,inset 0 1px #ffffff18;
+ background:rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.16);
+ border-radius:20px;padding:18px;margin-bottom:16px;
+ box-shadow:0 8px 25px #0005
 }
-h2{margin:5px 0 12px;font-size:23px}
-.description{color:#a8bbd7;font-size:14px;line-height:1.6}
-button,select{font-family:inherit}
-.menu-btn{
- width:100%;padding:17px;margin:9px 0;
- border:1px solid #5deaff55;border-radius:14px;
- color:white;font-size:16px;font-weight:bold;
- background:linear-gradient(100deg,#0877c9,#08b9c7);
- box-shadow:0 5px 18px #00bfff30;
- cursor:pointer;
+h2{color:#ffd76a;margin:5px 0 16px}
+button,select{
+ border:0;border-radius:12px;padding:12px 15px;
+ font-size:15px;font-weight:bold;cursor:pointer
 }
-.menu-btn.gold{
- background:linear-gradient(100deg,#a96c18,#f0bd4e);
- color:#17101b;border:0;
-}
+button{color:white;background:linear-gradient(120deg,#1769ff,#773bff)}
 button:active{transform:scale(.97)}
-.hidden{display:none!important}
-.settings{
- margin:15px 0;padding:13px;
- background:#0b1730;border-radius:14px;
-}
-select{
- width:100%;padding:12px;color:white;
- background:#1c3153;border:1px solid #52739a;
- border-radius:10px;font-size:15px;
-}
-.scores{display:flex;gap:8px;margin:20px 0}
-.score{
- flex:1;padding:12px 3px;border-radius:13px;
- background:#0a1832;border:1px solid #29496d;
- color:#a9c4df;font-size:12px;
-}
-.score strong{
- display:block;font-size:25px;
- color:#36e5ff;margin-top:6px;
-}
-.score:nth-child(2) strong{color:#ffc45b}
-.score:nth-child(3) strong{color:#fff}
-.status{
- min-height:48px;display:flex;
- justify-content:center;align-items:center;
- font-size:18px;font-weight:bold;
- color:#ffdc7c;
- margin:12px 0;
-}
+.modes{display:flex;gap:10px}
+.modes button{flex:1}
+.active{background:linear-gradient(120deg,#ffae00,#ff6b00)!important}
+select{background:#fff;color:#172044;width:100%;margin-top:12px}
+.score{display:flex;justify-content:space-around;gap:8px}
+.score div{flex:1;background:#ffffff12;padding:12px 5px;border-radius:12px}
+.score strong{display:block;font-size:25px;color:#ffd76a;margin-top:5px}
+.status{font-size:19px;font-weight:bold;color:#fff;margin:15px 0}
 .board{
  display:grid;grid-template-columns:repeat(3,1fr);
- gap:10px;max-width:330px;margin:15px auto;
+ gap:9px;max-width:330px;margin:15px auto
 }
 .cell{
- aspect-ratio:1;border-radius:17px;
- border:1px solid #37618c;
- background:linear-gradient(145deg,#213d63,#122746);
- color:#35e7ff;font-size:48px;font-weight:900;
- box-shadow:inset 0 2px 12px #ffffff0a,0 5px 12px #0005;
- cursor:pointer;transition:.2s;
+ aspect-ratio:1;border-radius:15px;
+ background:linear-gradient(145deg,#182b58,#25205a);
+ border:2px solid #667cff55;
+ color:#fff;font-size:48px;font-weight:900;
+ display:flex;align-items:center;justify-content:center;
+ box-shadow:0 5px 12px #0005
 }
-.cell.o{color:#ffc45b}
-.cell:disabled{cursor:default}
-.cell.winner{
- background:linear-gradient(145deg,#126c70,#174b62);
- border-color:#56ffdc;
- box-shadow:0 0 20px #25ffd877;
-}
-.actions{display:flex;gap:10px;margin-top:18px}
-.action{
- flex:1;padding:14px 8px;border-radius:12px;
- border:0;background:#087ac9;color:white;
- font-weight:bold;font-size:14px;cursor:pointer;
-}
-.action.back{background:#293c59}
-.footer{color:#748eae;font-size:11px;margin:25px 0}
-#result{
- font-size:19px;font-weight:bold;color:#ffda79;
- min-height:28px;margin:12px 0;
-}
-@keyframes pop{
- 0%{transform:scale(.7);opacity:.3}
- 100%{transform:scale(1);opacity:1}
-}
-.cell:not(:empty){animation:pop .2s ease}
+.cell.x{color:#50d9ff;text-shadow:0 0 15px #00bfff}
+.cell.o{color:#ffcb60;text-shadow:0 0 15px #ff9900}
+.cell.win{background:#176b54;border-color:#70ffbb}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.controls button{min-width:125px}
+.small{font-size:12px;color:#aab9df;margin-top:18px}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="container">
 
  <div class="logo">FZ555GAME</div>
- <div class="subtitle">ULTIMATE GAMING ARENA</div>
+ <div class="subtitle">★ THE ULTIMATE TIC TAC TOE ★</div>
 
- <section id="menu" class="panel">
-  <div style="font-size:55px;margin:8px">🏆</div>
-  <h2>WELCOME TO FZ555</h2>
-  <p class="description">Choose your battle mode and become the champion!</p>
-  <button class="menu-btn" onclick="start('computer')">🤖 SINGLE PLAYER</button>
-  <button class="menu-btn gold" onclick="start('friend')">👥 TWO PLAYERS</button>
-  <p class="description">⚡ THINK • PLAY • WIN ⚡</p>
- </section>
-
- <section id="game" class="panel hidden">
-  <h2 id="gameTitle">GAME ARENA</h2>
-
-  <div id="levelBox" class="settings hidden">
-   <p style="margin:0 0 10px;color:#a9c4df">SELECT DIFFICULTY</p>
-   <select id="level">
-    <option value="easy">🟢 EASY</option>
-    <option value="medium">🟡 MEDIUM</option>
-    <option value="hard">🔴 HARD</option>
-   </select>
+ <div class="panel">
+  <h2>SELECT GAME MODE</h2>
+  <div class="modes">
+   <button id="single" class="active" onclick="setMode('single')">Single Player</button>
+   <button id="double" onclick="setMode('double')">Double Player</button>
   </div>
+  <select id="difficulty" onchange="newGame()">
+   <option value="easy">Easy Level</option>
+   <option value="medium">Medium Level</option>
+   <option value="hard">Hard Level</option>
+  </select>
+ </div>
 
-  <div class="scores">
-   <div class="score">PLAYER X<strong id="sx">0</strong></div>
-   <div class="score">PLAYER O<strong id="so">0</strong></div>
-   <div class="score">DRAW<strong id="sd">0</strong></div>
+ <div class="panel">
+  <h2>🏆 SCORE BOARD</h2>
+  <div class="score">
+   <div>PLAYER X<strong id="scoreX">0</strong></div>
+   <div>PLAYER O<strong id="scoreO">0</strong></div>
+   <div>DRAW<strong id="scoreD">0</strong></div>
   </div>
+ </div>
 
-  <div class="status" id="status">PLAYER X TURN</div>
-  <div id="result"></div>
-
-  <div class="board">
-   <button class="cell" onclick="play(0)"></button>
-   <button class="cell" onclick="play(1)"></button>
-   <button class="cell" onclick="play(2)"></button>
-   <button class="cell" onclick="play(3)"></button>
-   <button class="cell" onclick="play(4)"></button>
-   <button class="cell" onclick="play(5)"></button>
-   <button class="cell" onclick="play(6)"></button>
-   <button class="cell" onclick="play(7)"></button>
-   <button class="cell" onclick="play(8)"></button>
+ <div class="panel">
+  <div class="status" id="status">Player X's Turn</div>
+  <div class="board" id="board"></div>
+  <div class="controls">
+   <button onclick="newGame()">↻ New Game</button>
+   <button onclick="resetScores()">Reset Score</button>
   </div>
+ </div>
 
-  <div class="actions">
-   <button class="action" onclick="reset()">↻ NEW GAME</button>
-   <button class="action back" onclick="home()">⌂ MENU</button>
-  </div>
- </section>
-
- <div class="footer">FZ555GAME © 2026 | PLAY LIKE A CHAMPION</div>
+ <div class="panel">
+  <button id="musicBtn" onclick="toggleMusic()">🎵 Music: OFF</button>
+  <p class="small">FZ555GAME • PLAY • ENJOY • WIN</p>
+ </div>
 </div>
 
 <script>
-let board=Array(9).fill("");
-let turn="X",mode="friend",over=false;
-let score={X:0,O:0,D:0};
-const cells=[...document.querySelectorAll(".cell")];
-const lines=[
- [0,1,2],[3,4,5],[6,7,8],
- [0,3,6],[1,4,7],[2,5,8],
- [0,4,8],[2,4,6]
-];
+let cells=Array(9).fill('');
+let current='X',mode='single',finished=false;
+let scores={X:0,O:0,D:0};
+let audio=null,musicOn=false,musicTimer=null,noteIndex=0;
 
-function start(m){
- mode=m;score={X:0,O:0,D:0};
- document.getElementById("menu").classList.add("hidden");
- document.getElementById("game").classList.remove("hidden");
- document.getElementById("levelBox").classList.toggle("hidden",m!=="computer");
- document.getElementById("gameTitle").textContent=
- m==="computer"?"🤖 CHALLENGE MODE":"👥 FRIEND BATTLE";
- update();reset();
-}
-function home(){
- document.getElementById("game").classList.add("hidden");
- document.getElementById("menu").classList.remove("hidden");
-}
-function update(){
- sx.textContent=score.X;so.textContent=score.O;sd.textContent=score.D;
-}
-function message(t){status.textContent=t}
-function reset(){
- board=Array(9).fill("");turn="X";over=false;
- cells.forEach(c=>{
-  c.textContent="";c.disabled=false;
-  c.classList.remove("o","winner");
+const board=document.getElementById('board');
+const statusText=document.getElementById('status');
+const difficulty=document.getElementById('difficulty');
+
+function drawBoard(){
+ board.innerHTML='';
+ cells.forEach((value,i)=>{
+  const b=document.createElement('button');
+  b.className='cell '+(value?value.toLowerCase():'');
+  b.textContent=value;
+  b.onclick=()=>play(i);
+  board.appendChild(b);
  });
- result.textContent="";
- message("⚡ PLAYER X TURN");
 }
-function check(a){
- for(let line of lines){
-  let [x,y,z]=line;
-  if(a[x]&&a[x]===a[y]&&a[y]===a[z])
-   return {winner:a[x],line};
- }
- if(a.every(Boolean))return {winner:"D",line:[]};
- return null;
+function setMode(m){
+ mode=m;
+ document.getElementById('single').classList.toggle('active',m==='single');
+ document.getElementById('double').classList.toggle('active',m==='double');
+ difficulty.style.display=m==='single'?'block':'none';
+ newGame();
 }
-function finish(r){
- over=true;
- cells.forEach(c=>c.disabled=true);
- if(r.winner==="D"){
-  score.D++;message("🤝 MATCH DRAW!");
-  result.textContent="GREAT GAME!";
- }else{
-  score[r.winner]++;
-  r.line.forEach(i=>cells[i].classList.add("winner"));
-  message("🏆 PLAYER "+r.winner+" WINS!");
-  result.textContent="✨ CHAMPION!";
- }
- update();
+function newGame(){
+ cells=Array(9).fill('');
+ current='X';finished=false;
+ statusText.textContent="Player X's Turn";
+ drawBoard();
 }
 function play(i){
- if(over||board[i]||(mode==="computer"&&turn==="O"))return;
- move(i);
- if(!over&&mode==="computer"&&turn==="O"){
-  message("🤖 COMPUTER THINKING...");
-  setTimeout(computer,350);
+ startAudio();
+ if(finished||cells[i])return;
+ cells[i]=current;
+ drawBoard();
+ const result=checkWinner();
+ if(result){endGame(result);return;}
+ current=current==='X'?'O':'X';
+ statusText.textContent= mode==='single'&&current==='O'
+  ?'Computer is thinking...':"Player "+current+"'s Turn";
+ if(mode==='single'&&current==='O'){
+  setTimeout(computerMove,350);
  }
 }
-function move(i){
- board[i]=turn;
- cells[i].textContent=turn;
- if(turn==="O")cells[i].classList.add("o");
- cells[i].disabled=true;
- let r=check(board);
- if(r){finish(r);return;}
- turn=turn==="X"?"O":"X";
- message(mode==="computer"&&turn==="O"?
- "🤖 COMPUTER TURN":"⚡ PLAYER "+turn+" TURN");
+function checkWinner(){
+ const lines=[[0,1,2],[3,4,5],[6,7,8],
+ [0,3,6],[1,4,7],[2,5,8],
+ [0,4,8],[2,4,6]];
+ for(const line of lines){
+  if(cells[line[0]]&&cells[line[0]]===cells[line[1]]&&cells[line[1]]===cells[line[2]]){
+   return {winner:cells[line[0]],line};
+  }
+ }
+ if(cells.every(Boolean))return {winner:'D',line:[]};
+ return null;
 }
-function winningMove(p){
+function endGame(result){
+ finished=true;
+ if(result.winner==='D'){
+  scores.D++;statusText.textContent="🤝 GAME DRAW!";
+ }else{
+  scores[result.winner]++;
+  statusText.textContent="🏆 "+result.winner+" WINS!";
+  result.line.forEach(i=>board.children[i].classList.add('win'));
+ }
+ updateScores();
+ playTone(result.winner==='D'?330:660,.3);
+}
+function updateScores(){
+ document.getElementById('scoreX').textContent=scores.X;
+ document.getElementById('scoreO').textContent=scores.O;
+ document.getElementById('scoreD').textContent=scores.D;
+}
+function resetScores(){
+ scores={X:0,O:0,D:0};
+ updateScores();newGame();
+}
+function computerMove(){
+ if(finished)return;
+ let available=cells.map((v,i)=>v===''?i:-1).filter(i=>i!==-1);
+ if(!available.length)return;
+ let choice;
+ const level=difficulty.value;
+ if(level==='easy'){
+  choice=available[Math.floor(Math.random()*available.length)];
+ }else{
+  choice=findMove('O')??findMove('X');
+  if(choice===null||choice===undefined){
+   choice=available.includes(4)?4:available[Math.floor(Math.random()*available.length)];
+  }
+  if(level==='medium'&&Math.random()<.3){
+   choice=available[Math.floor(Math.random()*available.length)];
+  }
+ }
+ cells[choice]='O';drawBoard();
+ const result=checkWinner();
+ if(result){endGame(result);return;}
+ current='X';statusText.textContent="Player X's Turn";
+}
+function findMove(mark){
  for(let i=0;i<9;i++){
-  if(!board[i]){
-   let a=[...board];a[i]=p;
-   let r=check(a);
-   if(r&&r.winner===p)return i;
+  if(!cells[i]){
+   cells[i]=mark;
+   const win=checkWinner();
+   cells[i]='';
+   if(win&&win.winner===mark)return i;
   }
  }
  return null;
 }
-function randomMove(){
- let a=board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
- return a[Math.floor(Math.random()*a.length)];
-}
-function easyMove(){return randomMove();}
-function mediumMove(){
- return winningMove("O")??winningMove("X")??bestSimple();
-}
-function bestSimple(){
- if(!board[4])return 4;
- let a=[0,2,6,8].filter(i=>!board[i]);
- return a.length?a[Math.floor(Math.random()*a.length)]:randomMove();
-}
-function hardMove(){
- let best=-Infinity,choice=null;
- for(let i=0;i<9;i++)if(!board[i]){
-  board[i]="O";
-  let v=minimax(0,false);
-  board[i]="";
-  if(v>best){best=v;choice=i;}
+
+/* Sound and original background melody */
+function startAudio(){
+ if(!audio){
+  audio=new (window.AudioContext||window.webkitAudioContext)();
  }
- return choice;
+ if(audio.state==='suspended')audio.resume();
 }
-function minimax(depth,max){
- let r=check(board);
- if(r){
-  if(r.winner==="O")return 10-depth;
-  if(r.winner==="X")return depth-10;
-  return 0;
+function playTone(freq,duration){
+ if(!audio)return;
+ const osc=audio.createOscillator();
+ const gain=audio.createGain();
+ osc.type='sine';osc.frequency.value=freq;
+ gain.gain.setValueAtTime(.08,audio.currentTime);
+ gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);
+ osc.connect(gain);gain.connect(audio.destination);
+ osc.start();osc.stop(audio.currentTime+duration);
+}
+function toggleMusic(){
+ startAudio();
+ musicOn=!musicOn;
+ document.getElementById('musicBtn').textContent=
+  musicOn?'🎵 Music: ON':'🎵 Music: OFF';
+ if(musicOn){
+  const melody=[262,330,392,330,294,349,440,349];
+  musicTimer=setInterval(()=>{
+   if(musicOn){
+    playTone(melody[noteIndex%melody.length],.45);
+    noteIndex++;
+   }
+  },650);
+ }else{
+  clearInterval(musicTimer);
  }
- let best=max?-Infinity:Infinity;
- for(let i=0;i<9;i++)if(!board[i]){
-  board[i]=max?"O":"X";
-  let v=minimax(depth+1,!max);
-  board[i]="";
-  best=max?Math.max(best,v):Math.min(best,v);
- }
- return best;
 }
-function computer(){
- if(over)return;
- let l=document.getElementById("level").value;
- let i=l==="easy"?easyMove():l==="medium"?mediumMove():hardMove();
- if(i!==null&&i!==undefined)move(i);
-}
+document.addEventListener('click',()=>{
+ if(!audio)startAudio();
+},{once:true});
+
+drawBoard();
 </script>
 </body>
 </html>
