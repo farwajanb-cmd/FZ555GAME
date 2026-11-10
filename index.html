@@ -1,261 +1,440 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FZ555GAME</title>
+
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;min-height:100vh;padding:20px 12px;
- font-family:Arial,sans-serif;color:white;text-align:center;
- background:linear-gradient(145deg,#07152e,#101044,#25104a);
+* {
+  box-sizing: border-box;
 }
-.container{max-width:440px;margin:auto}
-.logo{
- font-size:36px;font-weight:900;letter-spacing:2px;
- color:#ffd76a;text-shadow:0 0 18px #ffb700;
- margin:12px 0 5px
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #090d25, #211044, #071d36);
+  color: white;
+  text-align: center;
+  padding: 20px 12px;
 }
-.subtitle{color:#b8c8ff;margin-bottom:22px}
-.panel{
- background:rgba(255,255,255,.08);
- border:1px solid rgba(255,255,255,.16);
- border-radius:20px;padding:18px;margin-bottom:16px;
- box-shadow:0 8px 25px #0005
+
+.container {
+  max-width: 440px;
+  margin: auto;
+  padding: 22px 16px;
+  border: 1px solid #d6ad48;
+  border-radius: 22px;
+  background: rgba(10, 15, 39, 0.92);
+  box-shadow: 0 0 25px #9b64ff55;
 }
-h2{color:#ffd76a;margin:5px 0 16px}
-button,select{
- border:0;border-radius:12px;padding:12px 15px;
- font-size:15px;font-weight:bold;cursor:pointer
+
+h1 {
+  color: #ffd66b;
+  font-size: 34px;
+  margin: 8px 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px #ffbd35;
 }
-button{color:white;background:linear-gradient(120deg,#1769ff,#773bff)}
-button:active{transform:scale(.97)}
-.modes{display:flex;gap:10px}
-.modes button{flex:1}
-.active{background:linear-gradient(120deg,#ffae00,#ff6b00)!important}
-select{background:#fff;color:#172044;width:100%;margin-top:12px}
-.score{display:flex;justify-content:space-around;gap:8px}
-.score div{flex:1;background:#ffffff12;padding:12px 5px;border-radius:12px}
-.score strong{display:block;font-size:25px;color:#ffd76a;margin-top:5px}
-.status{font-size:19px;font-weight:bold;color:#fff;margin:15px 0}
-.board{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:9px;max-width:330px;margin:15px auto
+
+.subtitle {
+  color: #c9c6e8;
+  margin-bottom: 22px;
 }
-.cell{
- aspect-ratio:1;border-radius:15px;
- background:linear-gradient(145deg,#182b58,#25205a);
- border:2px solid #667cff55;
- color:#fff;font-size:48px;font-weight:900;
- display:flex;align-items:center;justify-content:center;
- box-shadow:0 5px 12px #0005
+
+button, select {
+  border: 1px solid #d7b45a;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
 }
-.cell.x{color:#50d9ff;text-shadow:0 0 15px #00bfff}
-.cell.o{color:#ffcb60;text-shadow:0 0 15px #ff9900}
-.cell.win{background:#176b54;border-color:#70ffbb}
-.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.controls button{min-width:125px}
-.small{font-size:12px;color:#aab9df;margin-top:18px}
+
+button {
+  color: white;
+  background: linear-gradient(135deg, #5630a5, #25145b);
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button.active {
+  background: linear-gradient(135deg, #d99d22, #8a5410);
+  color: #151020;
+}
+
+select {
+  background: #171b3d;
+  color: white;
+  width: 90%;
+}
+
+#musicBtn {
+  background: linear-gradient(135deg, #087e70, #064b57);
+  border: 2px solid #4ce3c5;
+  width: 90%;
+  margin-top: 16px;
+  font-size: 17px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.score {
+  flex: 1;
+  padding: 12px 5px;
+  border-radius: 12px;
+  background: #171b3d;
+  border: 1px solid #7663bb;
+}
+
+.score strong {
+  display: block;
+  color: #ffd66b;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+#status {
+  min-height: 28px;
+  color: #ffe18a;
+  font-size: 19px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  max-width: 330px;
+  margin: 18px auto;
+}
+
+.cell {
+  aspect-ratio: 1;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #27245a, #121936);
+  border: 2px solid #9570df;
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell.x {
+  color: #62d7ff;
+}
+
+.cell.o {
+  color: #ffcf65;
+}
+
+.cell.win {
+  background: #35604e;
+  border-color: #7dffbd;
+}
+
+.actions {
+  margin-top: 16px;
+}
+
+.small {
+  color: #b9b5d4;
+  font-size: 12px;
+  margin-top: 20px;
+}
 </style>
 </head>
+
 <body>
 <div class="container">
 
- <div class="logo">FZ555GAME</div>
- <div class="subtitle">★ THE ULTIMATE TIC TAC TOE ★</div>
+<h1>FZ555GAME</h1>
+<div class="subtitle">VIP TIC TAC TOE CHALLENGE</div>
 
- <div class="panel">
-  <h2>SELECT GAME MODE</h2>
-  <div class="modes">
-   <button id="single" class="active" onclick="setMode('single')">Single Player</button>
-   <button id="double" onclick="setMode('double')">Double Player</button>
-  </div>
+<div>
+  <button id="singleBtn" class="active" onclick="setMode('single')">
+    SINGLE PLAYER
+  </button>
+  <button id="doubleBtn" onclick="setMode('double')">
+    TWO PLAYERS
+  </button>
+</div>
+
+<div>
   <select id="difficulty" onchange="newGame()">
-   <option value="easy">Easy Level</option>
-   <option value="medium">Medium Level</option>
-   <option value="hard">Hard Level</option>
+    <option value="easy">Easy Level</option>
+    <option value="medium">Medium Level</option>
+    <option value="hard">Hard Level</option>
   </select>
- </div>
+</div>
 
- <div class="panel">
-  <h2>🏆 SCORE BOARD</h2>
-  <div class="score">
-   <div>PLAYER X<strong id="scoreX">0</strong></div>
-   <div>PLAYER O<strong id="scoreO">0</strong></div>
-   <div>DRAW<strong id="scoreD">0</strong></div>
-  </div>
- </div>
+<div class="scoreboard">
+  <div class="score">PLAYER X<strong id="scoreX">0</strong></div>
+  <div class="score">PLAYER O<strong id="scoreO">0</strong></div>
+  <div class="score">DRAW<strong id="scoreD">0</strong></div>
+</div>
 
- <div class="panel">
-  <div class="status" id="status">Player X's Turn</div>
-  <div class="board" id="board"></div>
-  <div class="controls">
-   <button onclick="newGame()">↻ New Game</button>
-   <button onclick="resetScores()">Reset Score</button>
-  </div>
- </div>
+<div id="status">Player X Turn</div>
 
- <div class="panel">
-  <button id="musicBtn" onclick="toggleMusic()">🎵 Music: OFF</button>
-  <p class="small">FZ555GAME • PLAY • ENJOY • WIN</p>
- </div>
+<div class="board" id="board">
+  <button class="cell" onclick="play(0)"></button>
+  <button class="cell" onclick="play(1)"></button>
+  <button class="cell" onclick="play(2)"></button>
+  <button class="cell" onclick="play(3)"></button>
+  <button class="cell" onclick="play(4)"></button>
+  <button class="cell" onclick="play(5)"></button>
+  <button class="cell" onclick="play(6)"></button>
+  <button class="cell" onclick="play(7)"></button>
+  <button class="cell" onclick="play(8)"></button>
+</div>
+
+<button onclick="newGame()">🔄 NEW GAME</button>
+<button onclick="resetScores()">RESET SCORE</button>
+
+<button id="musicBtn" onclick="toggleMusic()">
+  🎵 MUSIC: OFF
+</button>
+
+<div class="small">
+  © 2026 FZ555GAME | PLAY • ENJOY • WIN
+</div>
+
 </div>
 
 <script>
-let cells=Array(9).fill('');
-let current='X',mode='single',finished=false;
-let scores={X:0,O:0,D:0};
-let audio=null,musicOn=false,musicTimer=null,noteIndex=0;
+let board = Array(9).fill("");
+let current = "X";
+let mode = "single";
+let gameOver = false;
+let scores = {X: 0, O: 0, D: 0};
+let musicOn = false;
+let audio = null;
+let musicTimer = null;
+let noteIndex = 0;
 
-const board=document.getElementById('board');
-const statusText=document.getElementById('status');
-const difficulty=document.getElementById('difficulty');
+const melody = [
+  261.63, 329.63, 392.00, 329.63,
+  293.66, 349.23, 440.00, 392.00
+];
 
-function drawBoard(){
- board.innerHTML='';
- cells.forEach((value,i)=>{
-  const b=document.createElement('button');
-  b.className='cell '+(value?value.toLowerCase():'');
-  b.textContent=value;
-  b.onclick=()=>play(i);
-  board.appendChild(b);
- });
-}
-function setMode(m){
- mode=m;
- document.getElementById('single').classList.toggle('active',m==='single');
- document.getElementById('double').classList.toggle('active',m==='double');
- difficulty.style.display=m==='single'?'block':'none';
- newGame();
-}
-function newGame(){
- cells=Array(9).fill('');
- current='X';finished=false;
- statusText.textContent="Player X's Turn";
- drawBoard();
-}
-function play(i){
- startAudio();
- if(finished||cells[i])return;
- cells[i]=current;
- drawBoard();
- const result=checkWinner();
- if(result){endGame(result);return;}
- current=current==='X'?'O':'X';
- statusText.textContent= mode==='single'&&current==='O'
-  ?'Computer is thinking...':"Player "+current+"'s Turn";
- if(mode==='single'&&current==='O'){
-  setTimeout(computerMove,350);
- }
-}
-function checkWinner(){
- const lines=[[0,1,2],[3,4,5],[6,7,8],
- [0,3,6],[1,4,7],[2,5,8],
- [0,4,8],[2,4,6]];
- for(const line of lines){
-  if(cells[line[0]]&&cells[line[0]]===cells[line[1]]&&cells[line[1]]===cells[line[2]]){
-   return {winner:cells[line[0]],line};
-  }
- }
- if(cells.every(Boolean))return {winner:'D',line:[]};
- return null;
-}
-function endGame(result){
- finished=true;
- if(result.winner==='D'){
-  scores.D++;statusText.textContent="🤝 GAME DRAW!";
- }else{
-  scores[result.winner]++;
-  statusText.textContent="🏆 "+result.winner+" WINS!";
-  result.line.forEach(i=>board.children[i].classList.add('win'));
- }
- updateScores();
- playTone(result.winner==='D'?330:660,.3);
-}
-function updateScores(){
- document.getElementById('scoreX').textContent=scores.X;
- document.getElementById('scoreO').textContent=scores.O;
- document.getElementById('scoreD').textContent=scores.D;
-}
-function resetScores(){
- scores={X:0,O:0,D:0};
- updateScores();newGame();
-}
-function computerMove(){
- if(finished)return;
- let available=cells.map((v,i)=>v===''?i:-1).filter(i=>i!==-1);
- if(!available.length)return;
- let choice;
- const level=difficulty.value;
- if(level==='easy'){
-  choice=available[Math.floor(Math.random()*available.length)];
- }else{
-  choice=findMove('O')??findMove('X');
-  if(choice===null||choice===undefined){
-   choice=available.includes(4)?4:available[Math.floor(Math.random()*available.length)];
-  }
-  if(level==='medium'&&Math.random()<.3){
-   choice=available[Math.floor(Math.random()*available.length)];
-  }
- }
- cells[choice]='O';drawBoard();
- const result=checkWinner();
- if(result){endGame(result);return;}
- current='X';statusText.textContent="Player X's Turn";
-}
-function findMove(mark){
- for(let i=0;i<9;i++){
-  if(!cells[i]){
-   cells[i]=mark;
-   const win=checkWinner();
-   cells[i]='';
-   if(win&&win.winner===mark)return i;
-  }
- }
- return null;
+const winLines = [
+  [0,1,2], [3,4,5], [6,7,8],
+  [0,3,6], [1,4,7], [2,5,8],
+  [0,4,8], [2,4,6]
+];
+
+function setMode(value) {
+  mode = value;
+  document.getElementById("singleBtn").classList.toggle("active", mode === "single");
+  document.getElementById("doubleBtn").classList.toggle("active", mode === "double");
+  newGame();
 }
 
-/* Sound and original background melody */
-function startAudio(){
- if(!audio){
-  audio=new (window.AudioContext||window.webkitAudioContext)();
- }
- if(audio.state==='suspended')audio.resume();
+function render() {
+  document.querySelectorAll(".cell").forEach((cell, i) => {
+    cell.textContent = board[i];
+    cell.className = "cell";
+    if (board[i]) cell.classList.add(board[i].toLowerCase());
+  });
 }
-function playTone(freq,duration){
- if(!audio)return;
- const osc=audio.createOscillator();
- const gain=audio.createGain();
- osc.type='sine';osc.frequency.value=freq;
- gain.gain.setValueAtTime(.08,audio.currentTime);
- gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);
- osc.connect(gain);gain.connect(audio.destination);
- osc.start();osc.stop(audio.currentTime+duration);
-}
-function toggleMusic(){
- startAudio();
- musicOn=!musicOn;
- document.getElementById('musicBtn').textContent=
-  musicOn?'🎵 Music: ON':'🎵 Music: OFF';
- if(musicOn){
-  const melody=[262,330,392,330,294,349,440,349];
-  musicTimer=setInterval(()=>{
-   if(musicOn){
-    playTone(melody[noteIndex%melody.length],.45);
-    noteIndex++;
-   }
-  },650);
- }else{
-  clearInterval(musicTimer);
- }
-}
-document.addEventListener('click',()=>{
- if(!audio)startAudio();
-},{once:true});
 
-drawBoard();
+function winner() {
+  for (const line of winLines) {
+    const [a,b,c] = line;
+    if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+      return line;
+    }
+  }
+  return null;
+}
+
+function checkGame() {
+  const line = winner();
+
+  if (line) {
+    gameOver = true;
+    line.forEach(i => document.querySelectorAll(".cell")[i].classList.add("win"));
+    scores[board[line[0]]]++;
+    updateScores();
+    document.getElementById("status").textContent =
+      "🏆 Player " + board[line[0]] + " Wins!";
+    return true;
+  }
+
+  if (board.every(Boolean)) {
+    gameOver = true;
+    scores.D++;
+    updateScores();
+    document.getElementById("status").textContent = "🤝 Match Draw!";
+    return true;
+  }
+
+  return false;
+}
+
+function play(index) {
+  if (gameOver || board[index]) return;
+  if (mode === "single" && current === "O") return;
+
+  board[index] = current;
+  render();
+
+  if (checkGame()) return;
+
+  current = current === "X" ? "O" : "X";
+  updateStatus();
+
+  if (mode === "single" && current === "O") {
+    setTimeout(computerMove, 450);
+  }
+}
+
+function computerMove() {
+  if (gameOver) return;
+
+  const level = document.getElementById("difficulty").value;
+  let move;
+
+  if (level === "easy") {
+    move = randomMove();
+  } else if (level === "medium") {
+    move = winningMove("O") ?? winningMove("X") ?? randomMove();
+  } else {
+    move = winningMove("O") ?? winningMove("X") ?? bestMove();
+  }
+
+  if (move === undefined || move === null) return;
+
+  board[move] = "O";
+  render();
+
+  if (checkGame()) return;
+
+  current = "X";
+  updateStatus();
+}
+
+function randomMove() {
+  const empty = board.map((v,i) => v ? null : i).filter(v => v !== null);
+  return empty[Math.floor(Math.random() * empty.length)];
+}
+
+function winningMove(player) {
+  for (let i = 0; i < 9; i++) {
+    if (!board[i]) {
+      board[i] = player;
+      const wins = winner();
+      board[i] = "";
+      if (wins) return i;
+    }
+  }
+  return null;
+}
+
+function bestMove() {
+  if (!board[4]) return 4;
+
+  const corners = [0,2,6,8].filter(i => !board[i]);
+  if (corners.length) {
+    return corners[Math.floor(Math.random() * corners.length)];
+  }
+
+  return randomMove();
+}
+
+function updateStatus() {
+  document.getElementById("status").textContent =
+    "Player " + current + " Turn";
+}
+
+function updateScores() {
+  document.getElementById("scoreX").textContent = scores.X;
+  document.getElementById("scoreO").textContent = scores.O;
+  document.getElementById("scoreD").textContent = scores.D;
+}
+
+function newGame() {
+  board = Array(9).fill("");
+  current = "X";
+  gameOver = false;
+  render();
+  updateStatus();
+}
+
+function resetScores() {
+  scores = {X: 0, O: 0, D: 0};
+  updateScores();
+  newGame();
+}
+
+function toggleMusic() {
+  if (musicOn) {
+    clearInterval(musicTimer);
+    musicTimer = null;
+    musicOn = false;
+    document.getElementById("musicBtn").textContent = "🎵 MUSIC: OFF";
+    return;
+  }
+
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) {
+      document.getElementById("status").textContent = "Audio not supported";
+      return;
+    }
+
+    if (!audio) audio = new AudioContext();
+
+    audio.resume().then(() => {
+      musicOn = true;
+      document.getElementById("musicBtn").textContent = "🎵 MUSIC: ON";
+      playMelody();
+      musicTimer = setInterval(playMelody, 350);
+    }).catch(() => {
+      document.getElementById("status").textContent = "Tap Music again to start";
+    });
+  } catch (error) {
+    document.getElementById("status").textContent = "Music unavailable";
+  }
+}
+
+function playMelody() {
+  if (!audio || audio.state !== "running" || !musicOn) return;
+
+  const oscillator = audio.createOscillator();
+  const gain = audio.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.value = melody[noteIndex % melody.length];
+  noteIndex++;
+
+  gain.gain.setValueAtTime(0.035, audio.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.25);
+
+  oscillator.connect(gain);
+  gain.connect(audio.destination);
+
+  oscillator.start();
+  oscillator.stop(audio.currentTime + 0.26);
+}
+
+render();
+updateScores();
 </script>
 </body>
 </html>
